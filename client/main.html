@@ -1,0 +1,58 @@
+<head>
+    <title>tutProject</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="red">
+    <div class="container">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">NoteManager</a>
+            <ul id="nav-mobile" class="right">
+                <li class="nav-item">
+                    {{#if currentUser}}
+                        <button data-target="addModal" class="btn modal-trigger">Add note</button>
+                    {{/if}}
+                    {{> loginButtons}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>Latest Notes</h1>
+    {{#if currentUser}}
+        <ul class="collection">
+            {{#each notes}}
+                {{> note}}
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>Please Login to manage notes</p>
+    {{/if}}
+</div>
+
+{{>add}}
+
+</body>
+
+<template name="note">
+    <li class="collection-item">
+        {{text}}: <strong>Added by {{username}}</strong>
+        <a href="#" class="delete-note secondary-content"><i class="material-icons">close</i></a>
+    </li>
+</template>
+
+<template name="add">
+    <!--Modal structure-->
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <h4>Add note</h4>
+            <form class="add-form">
+                <input autofocus type="text" name="text" placeholder="Add note..." >
+            </form>
+        </div>
+    </div>
+</template>
